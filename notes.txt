@@ -1,0 +1,37 @@
+
+____________________________________________________________________________________________
+6/19
+SINUSOIDAL FREQUENCY ESTIMATION BY GRADIENT DESCENT Hayes
+	The loss (he shoes MSE, MAE, DFT [discreet Fourier transform] are all highly non convex (he is doing a sum of sin waves, I don't think my think differs substantially to, no, not sure if mine differs enough, I gotta math]. It is frequency that is the issue, the loss wrt frequency is going to be sin wavy, and those derivatives are going to be uninformative
+	
+	DIFFERENTIABLE DIGITAL SIGNAL PROCESSING engel
+		At the heart of the synthesis techniques explored in this paper is the sinusoidal oscillator. That sounds like my first layer.
+They individually model things, reverb, 
+	multi scale spectrogram loss is what they are using.  
+
+	frequency is the issue.  How can you tune it? Like, it's always wrong until it is exactly right.  If you are half the frequency, how can it learn to get to 3/4 then the right frequency.  It
+
+	
+
+_________________________________
+6/17
+
+alright, got it training.  the "batch" is really just how many time steps you run through it at the time.  i need to spend some time making sure it is doing what i think. 
+
+got it training.  running it with mse, really high losses.  only have activations (relu) on w and phi, not on amplitude.  not sure about that.  
+
+training with very few layers (the SineWaveNetwork() in csn) doesn't do much.  making it deeper, giving it more small waves, and decreasing to the one output that we overfitting on (dog bark, monet is the dog that inspired it, ben's dog, if you marry him, if not, delete)
+
+make configs next time.  
+hyperparameters = {
+    'learning_rate': 0.0001,
+    'epochs': 100,
+    'batch_size': 100,
+}
+with (6 layers, decreasing from 100 base) started learning somewhat consistently
+
+also, check the passing of the phi and w.  that addition (as well as the weird way i want to do gd)
+
+you want the biggest waves and the longest phi to change the fastest.  thats gd.  
+
+i think i can do it even with the relus on there.  mess with it.  yeah,  pre relu there will be negatives, which will subtract, after the backward pass and step, readjust everything

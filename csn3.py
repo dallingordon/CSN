@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 
+##this one has the freq inverted correctly
 class SineWaveLayer(nn.Module):
     def __init__(self, n, phi_prev=False, w_prev=False):
         super(SineWaveLayer, self).__init__()
@@ -10,23 +10,23 @@ class SineWaveLayer(nn.Module):
         self.w_prev = w_prev
         
         # Parameters A, w, phi
-        self.A = nn.Parameter(torch.randn(n, 1))
-        self.w = nn.Parameter(torch.randn(n, 1))
-        self.phi = nn.Parameter(torch.randn(n, 1))
+        self.A = nn.Parameter(torch.rand(n, 1))
+        self.w = nn.Parameter(torch.rand(n, 1))
+        self.phi = nn.Parameter(torch.rand(n, 1))
         
         # Single phi_current parameter
-        self.phi_current = nn.Parameter(torch.randn(1))
+        self.phi_current = nn.Parameter(torch.rand(1))
         
         if phi_prev:
-            self.phi_previous = nn.Parameter(torch.randn(1))
+            self.phi_previous = nn.Parameter(torch.rand(1))
         else:
             self.phi_previous = None
         
         # Single current_w parameter
-        self.current_w = nn.Parameter(torch.randn(1))
+        self.current_w = nn.Parameter(torch.rand(1))
         
         if w_prev:
-            self.previous_w = nn.Parameter(torch.randn(1))
+            self.previous_w = nn.Parameter(torch.rand(1))
         else:
             self.previous_w = None
 
@@ -34,24 +34,36 @@ class SineWaveLayer(nn.Module):
         # Expand t_vector to match the shape of parameters
         
         # Calculate the phase
-        phi = F.relu(self.phi)
-        phi_static = F.relu(self.phi_current)
+        phi = self.phi
+        phi_static = self.phi_current
         if self.phi_prev and phi_previous is not None:
             phi_static = phi_static + phi_previous
         phi = phi + phi_static
         
         # Calculate the angular frequency
-        w = F.relu(self.w)
-        w_static = F.relu(self.current_w)
+        w = self.w
+        w_static = self.current_w
         if self.w_prev and w_previous is not None:
             w_static = w_static + w_previous
         w = w + w_static
         
         # Calculate the sine wave
-        sine_wave = self.A * torch.sin(w * t_vector + phi)
+        sine_wave = self.A * torch.sin((1/w) * t_vector + phi)
         
         return sine_wave, phi_static , w_static
 
+    def top_up_phi(self):
+        with torch.no_grad():
+            min_phi = self.phi.min()
+            self.phi -= min_phi
+            self.phi_current += min_phi
+            
+    def top_up_w(self):
+        with torch.no_grad():
+            min_w = self.w.min()
+            self.w -= min_w
+            self.current_w += min_w
+    
 class SelectorWaveLayer(nn.Module):
     def __init__(self, n, m, phi_prev=False, w_prev=False):
         super(SelectorWaveLayer, self).__init__()
@@ -61,48 +73,60 @@ class SelectorWaveLayer(nn.Module):
         self.w_prev = w_prev
         
         # Parameters w, phi
-        self.w = nn.Parameter(torch.randn(m, n))
-        self.phi = nn.Parameter(torch.randn(m, n))
+        self.w = nn.Parameter(torch.rand(m, n))
+        self.phi = nn.Parameter(torch.rand(m, n))
         
         # Single phi_current parameter
-        self.phi_current = nn.Parameter(torch.randn(1))
+        self.phi_current = nn.Parameter(torch.rand(1))
         
         if phi_prev:
-            self.phi_previous = nn.Parameter(torch.randn(1))
+            self.phi_previous = nn.Parameter(torch.rand(1))
         else:
             self.phi_previous = None
         
         # Single current_w parameter
-        self.current_w = nn.Parameter(torch.randn(1))
+        self.current_w = nn.Parameter(torch.rand(1))
         
         if w_prev:
-            self.previous_w = nn.Parameter(torch.randn(1))
+            self.previous_w = nn.Parameter(torch.rand(1))
         else:
             self.previous_w = None
 
     def forward(self, t_vector, wave_input, phi_previous=None, w_previous=None):
         # Expand t_vector to match the shape of parameters
         
-        phi = F.relu(self.phi)
-        phi_static = F.relu(self.phi_current)
+        phi = self.phi
+        phi_static = self.phi_current
         if self.phi_prev and phi_previous is not None:
             phi_static = phi_static + phi_previous
         phi = (phi + phi_static).unsqueeze(-1)
         
         # Calculate the angular frequency
-        w = F.relu(self.w)
-        w_static = F.relu(self.current_w)
+        w = self.w
+        w_static = self.current_w
         if self.w_prev and w_previous is not None:
             w_static = w_static + w_previous
         w = (w + w_static).unsqueeze(-1)
         
         # Calculate the sine wave
-        sine_wave = 0.5 * torch.sin(w * t_vector + phi) + 0.5
+        sine_wave = 0.5 * torch.sin((1/w) * t_vector + phi) + 0.5
         
         # Perform the weighted sum
         result = torch.einsum('ijk,jk->ik', sine_wave, wave_input)
         
         return result, phi_static, w_static
+    
+    def top_up_phi(self):
+        with torch.no_grad():
+            min_phi = self.phi.min()
+            self.phi -= min_phi
+            self.phi_current += min_phi
+            
+    def top_up_w(self):
+        with torch.no_grad():
+            min_w = self.w.min()
+            self.w -= min_w
+            self.current_w += min_w
 
 class SineWaveNetwork(nn.Module):
     def __init__(self):
