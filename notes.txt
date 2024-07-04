@@ -1,3 +1,5 @@
+7/4
+axis agreement might work for tuning phase.  HOWEVER, it depends on a correct frequency, otherwise maximizing this is nonsese.  
 
 ____________________________________________________________________________________________
 6/19
