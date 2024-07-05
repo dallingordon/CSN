@@ -1,6 +1,6 @@
 7/4
 axis agreement might work for tuning phase.  HOWEVER, it depends on a correct frequency, otherwise maximizing this is nonsese.  
-
+ messing with surrogates.  slope of all points? might work better with a range that is all connected?
 ____________________________________________________________________________________________
 6/19
 SINUSOIDAL FREQUENCY ESTIMATION BY GRADIENT DESCENT Hayes
