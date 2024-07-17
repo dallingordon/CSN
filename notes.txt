@@ -1,3 +1,54 @@
+7/16
+sine wave layer higher has higher than sampled frequencies, the idea being since they only manifest discretely they can model different shapes.  interesting idea.  didn't work well with simple stuff.  
+with complex stuff 
+
+even with higher (than sample rate freq) waves it isn't filling in the gaps.  it can converge with perfect data, but estimating the non supplied freq is hard.  
+
+i have SineWaveLayerInc working, and it seems to learn slow, but still improving
+
+questioning mse, i want it to multiply the wave if it works, but average may not be working.  i want to not worry about a few big mistakes.  idk pondering.
+also, add the high frequency ones too.  
+
+what if we just add the 2 losses together, train them both?
+
+___________________________________________________________________________________
+7/15
+no from Glidance.  fuck em
+
+okay, distance from the cost is important.  if you do all the same it gives them all the same value.  random init?
+network built them multiple times, not sure that helped.
+
+the phase loss is working really well. add layer i think i prefer to the binary one.  thats neat
+
+make it so the highest frequency is farthest away.  it starts by doing the lowest frequency wave in back prop, then moves back, the highest freq being the last.  so, each layer takes the next highest, adds it to the previous everything.  
+
+can i rig that to adjust based on a local loss somehow? make each one substract the max that it can?
+
+what happens if you add higher than sampling rate frequencies? i wonder if that gives you more control? like, you can estimate non-explicit frequencies using high freq waves? what would that look like? and what are the edits it would add.  draw.  it can't just be double, that would be the same as adding nyquist right?
+
+
+
+_______________________________________
+7/11
+
+nyqvist frequecny
+
+
+
+______________
+7/10
+OKAY the binary wave network is working.  right now it can learn itself.  I added phase agreement which is just trying to line phase up, that seems to be working well.  
+
+phi_center isn't working like i think, but it is converging, just to a different phi minima, which is inconsequential. 
+
+if the LEARNED wave is more limited that the target wave, it didn't converge.  that i think is the next big question.  if i add more frequencies can it learn? what if i did multiple of these and add them after the fact? CAPACITY????
+
+can it learn, or rather, how well can it approximate waves that are composed of other frequencies.
+
+explain the compression thing to kulis.  
+
+
+_____________________________________
 7/4
 axis agreement might work for tuning phase.  HOWEVER, it depends on a correct frequency, otherwise maximizing this is nonsese.  
  messing with surrogates.  slope of all points? might work better with a range that is all connected?
