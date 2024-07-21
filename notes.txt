@@ -1,3 +1,22 @@
+7/21
+original method didnt' work.  not surprising, added the waves at each layer, then. went to next.  i need branching
+
+i might need to just parameterize the activation? move where the cutoff is? so i can do the 1s and 0s and all that?
+
+each layer needs to learn its own amplitude, and that is added? at the end? yeah.  but it also needs to get passed through an activation that subsequent waves get selected with? or does every wave go through to the end? 
+
+
+
+____________
+7/20
+hi sad boy.  
+
+ok, double dutch layer.  takes a denominator, divides the sampling rate by that denom, and makes waves at opposite ends.  if you feed those into layers with succesivelye smaller denominators, you get binary double dutch.  
+
+the amplitutdes.  if they are equal, they should cancel out.  that works.  if you make one higher than the other you get phase offsets.  
+
+the other possible thing would be 2 sigmoids with positive 1 and negative 1.  not sure about that.  oooh actually, that and then a seperate param for that layers amplitude.  train and test babay.  
+___________________________________________________________
 7/16
 sine wave layer higher has higher than sampled frequencies, the idea being since they only manifest discretely they can model different shapes.  interesting idea.  didn't work well with simple stuff.  
 with complex stuff 
