@@ -1,3 +1,13 @@
+7/22
+i don't think they can share weights honey.   make em individual.  that is still way low
+
+ok, first it was doing real good at estimating a single non explicit frequency.  that is major.  
+
+working on the non-linearity.  the shapes aren't doing what i think.  figure that bit out, the c's in there are being shared and broadcast.  i think what i saw with the single wave is the a's are unique, but the c's aren't.  so they all learn the same activation pattern at every level? that makes sense to me.  attack that. gj.  you did good today.
+
+
+_______________________
+
 7/21
 original method didnt' work.  not surprising, added the waves at each layer, then. went to next.  i need branching
 
