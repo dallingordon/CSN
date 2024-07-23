@@ -1,3 +1,18 @@
+7/23
+it is killing the kernel at L=6 which is wild, that isn't that many.  scc time?
+it looks like it can learn with mse, not a perfect fit, but its only with L=5.  
+training is weird, i suspect gradients are at different scales, graph those by layer and type.  c is probably fine but my guess is the gradients are wiggling the mose for the lowest frequency layers.  prove that.
+
+yeah, it will learn at a particular rate, and then INCREASING it at higher epochs lets it keep training.  something is getting to zero, and then other crap keeps learning? gradients.
+
+the later layer grads are 100 to 1000 times smaller? graph
+
+everything is converging on zero.........
+
+i wrote it in double dutch, but what if we only have the final wave do amplitude? all the highest frequency things spit out the readding.  sum that whole layer to get the pred for that t instead of how it is now, each frequency spitting out a guess per denominator per t.  try that.
+
+
+__________________________________________________
 7/22
 i don't think they can share weights honey.   make em individual.  that is still way low
 
