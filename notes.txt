@@ -12,6 +12,16 @@ everything is converging on zero.........
 i wrote it in double dutch, but what if we only have the final wave do amplitude? all the highest frequency things spit out the readding.  sum that whole layer to get the pred for that t instead of how it is now, each frequency spitting out a guess per denominator per t.  try that.
 
 
+i think i need to do the activation test first.  ones and zeros.  no a.  cool
+
+also.  is there a way to make a 1/0 target with that sigmoid thing?
+
+add another one with a learnable c, and apply it to the target? the same c? idk.  weird.  
+
+i think i need to make it so that the only branch that gets updated is the one with the activations.  so, forward prop the activations when you do grad updates? thats interesting.  
+
+
+
 __________________________________________________
 7/22
 i don't think they can share weights honey.   make em individual.  that is still way low
