@@ -1,3 +1,23 @@
+7/24
+momentum.  when does it start
+model is resetting?
+    which one? teacher student?
+    
+is the training procedure different
+    how does it differ
+    
+gotta be that your starting to "model averaging"
+    exponential model averaging?
+    
+gotta be the weights.  the weights changed.  
+    
+is this training the student from scratch
+cheating?
+see what the defaults are.  warm up is suspicious
+training a piece and then train the whole thing?
+
+
+_____
 7/23
 it is killing the kernel at L=6 which is wild, that isn't that many.  scc time?
 it looks like it can learn with mse, not a perfect fit, but its only with L=5.  
