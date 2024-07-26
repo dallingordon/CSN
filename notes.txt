@@ -1,3 +1,8 @@
+7/25
+____
+lots to look at.  adding it at the end of another thing is a good idea.  all the hyper params, learning, init, b la bla.
+
+_____
 7/24
 momentum.  when does it start
 model is resetting?
