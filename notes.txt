@@ -1,3 +1,16 @@
+8/1
+PROXIMAL DIF
+
+next upgrade, i think because of long range frequencies? or just long patterns. randomly do long range loss, do the same as you did inside a batch, but look longer range.  
+
+also, this worked for the linear and sin.  i used mse and proximal diff loss (pdl)  also, t is changed to np.linspace and i spaced it out between like, 4 and 7 so that all the values are unique and its a wave, half a phase of it.
+
+for the minimal param model, weight it so a zero is penalized? yeah.  i don't want them small. like, below zero.
+
+It starts learning in the center, then works out.  i wonder if my initial t is doing what i want?
+
+
+
 7/25
 ____
 lots to look at.  adding it at the end of another thing is a good idea.  all the hyper params, learning, init, b la bla.
