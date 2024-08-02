@@ -1,3 +1,8 @@
+it does well with the most dominant frequency, lower ones struggle. the loss function i think is the real champ.  
+messed with CD with the slopes, that seems to accomplish basically the same thing.
+
+we could make batch area dim into something. care more about the distance? if you pay more attention to the big ones first, that makes sense.  you have to get the far distances first, then do the small ones?  mess with that.  
+__________________________________________________________________________________________________________
 8/1
 PROXIMAL DIF
 
