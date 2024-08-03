@@ -1,3 +1,15 @@
+8/3
+adding in a phi helped lots i think. 
+what if instead of a triangle i make a point on the top and bottom of the wave that is zero.  don't mess with the derivatives, but give it a spot that it can learn zero, near the tip.  try it
+
+Also, training on a higher frequency, i think it just takes longer to fill in those? it looks like its working.
+
+
+mess with the trainer i think.  random points, then stuff near them. don't do all difs, and if you do say, x points around the sample, weight it if you want.  
+
+
+high frequencies aren't being addressed well it seems.  i guess thos oscilations happen more, i wonder if bigger samples (given how i am training) affects if you use a batch wide loss.  might make sense to just look at neighbors.  if you get the local slopes (+/- 1 from the sample t) eventually that makes for the whole thing being correct.  emergent? 
+_______
 it does well with the most dominant frequency, lower ones struggle. the loss function i think is the real champ.  
 messed with CD with the slopes, that seems to accomplish basically the same thing.
 
