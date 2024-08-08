@@ -1,3 +1,9 @@
+8/8. been rough
+
+i made 2dDataLoader.ipynb which lets you randomly sample and get consecutive datapoints.  slope stuff has worked.  
+
+
+__________________________
 8/3
 adding in a phi helped lots i think. 
 what if instead of a triangle i make a point on the top and bottom of the wave that is zero.  don't mess with the derivatives, but give it a spot that it can learn zero, near the tip.  try it
