@@ -1,3 +1,39 @@
+8/12
+
+added a final sine, nothing wildly improved.   
+
+init x 10 for the amplitude params and it stalled.  do the opposite now,,,
+
+yeah, it looks like it can start low and learn higher.  i wonder if it makes sense to only increase the params? that isn't quite right but it seems to get to a place where it can't learn the highes extremes.  that might be a loss issue. it won't learn the one or 2 random edges cuz they get averaged out? 
+
+how do you make it MORE susceptible to extremes? 
+
+batch size from 100 to 20.  no major difference.  
+
+is there a way to, say we do a few consecutive, can we weight it higher if there are more swaps from positive to negative? idk how.
+
+okay, more consecutive points worked better.  thats interesting.  
+
+these ablations were all with lr=0.005
+
+i think i want to add the long distance ones too.  so right now it is just consecutive, upping num_consec seems to improve the acc
+
+with 50 i let it run to 400 epochs (best was with 20 consec, batchsize 100, bla bla.  
+50 didn't seem to be an improvement.  trying my finalWave with 20 consec,  not it. i think i may have gotten lucky that one time.  
+
+what if you also had some random ones, compare those slopes? do it seperately? like, another data loader? idk.  
+
+also, mess with dif in dif.  right now it is slopes.  what about the dif in those
+
+and of coure the network that has 2 params per layer, and it takes in t original, and the output from the previous
+
+
+okay, the chain one, make it so at each level you can add in a number of waves, those get passed to the next as t, and added again. 
+so, 10 layers, if the input to that is 5, you should have 2 x 5 x 10 so 100 params.  that seems right.  
+trying with 10:
+no, with the final thing: 
+
+_________________
 8/8. been rough
 
 i made 2dDataLoader.ipynb which lets you randomly sample and get consecutive datapoints.  slope stuff has worked.  
