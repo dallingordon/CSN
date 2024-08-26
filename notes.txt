@@ -1,3 +1,16 @@
+8/26
+added silence to the beginning and end.  is that difficult? i am starting to wonder if it needs help doing really high frequecny stuff?
+
+the final layer goes apart? i wonder if that is common? i like that the absolute amplitude is increasing, that makes sense, but yeah, weirdy.  
+
+not looking good, the noise shit.  that is to say, it doesn't learn zero well.  that flat line, it looks like the max amplitude in some way.  it must be something to do with all the layers? there is an effective max and min?
+
+it also looks like some early layers get higher amplitudes? that is surprising.  
+
+sine chain, what if each layer gets pushed through an amplitude 1 sine.  nice and normalized at every "layer"
+
+
+
 8/12
 
 added a final sine, nothing wildly improved.   
