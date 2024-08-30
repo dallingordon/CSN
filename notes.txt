@@ -1,3 +1,14 @@
+8/28
+
+epsilon? for when something is zero?  like, it may make sense to deaden layers maybe? what if phi is zero? how common is that?
+
+also super super sine can learn nothing, as in, input = output.  Is this a NAS thing? can i "deaden" or, uselessify a layer.  well obvs i can, i mean can i do it in an advantageous way.
+
+got that working well it seems.  i need logging.  i need inference (see lots of graphs, how do i wanna do that)
+i need to save latest and best weights.  
+
+I think i want a scheduler thing in the config, as well as an optimizer to do param groups, change the lr by layer.  maybe even by type.  like, phi's change different from a's or cs.  ponder that.  
+
 8/26
 added silence to the beginning and end.  is that difficult? i am starting to wonder if it needs help doing really high frequecny stuff?
 
