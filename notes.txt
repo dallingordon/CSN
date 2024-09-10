@@ -1,3 +1,14 @@
+9/7
+okay first of all, what i think he meant by the other way is more impressive the generation, it is the emergent capacity.  to say shit it wasn't trained on.  
+
+i want to add in a sentence (or start with word) embedding.  i am thinking of using a layer of llama toward the end.  pass that in at every t, and train it to output not just the integer for the audio but a bit as well of when to end.  put some ones at the very end so it knows to stop generating.  
+
+first try it with like, 10 words.  no emergence yet.  get digits 0-9 from google, and also the embeddings from llama, train it, and see if you can get a single model to make all 10 numbers intelligibly.  
+
+then string numbers together, each audio file is between 1 and say, 5 digits.  then see if it can produce files it wasn't trained on.  
+
+
+
 8/28
 
 epsilon? for when something is zero?  like, it may make sense to deaden layers maybe? what if phi is zero? how common is that?
