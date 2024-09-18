@@ -1,3 +1,9 @@
+9/16
+
+okay we have a small data set as well as a large one.  old stuff (llama) is cleaned up.  built dgwave.  puttins this stuff there. fix the configs and start testing those out on the scc.  
+
+
+
 9/7
 okay first of all, what i think he meant by the other way is more impressive the generation, it is the emergent capacity.  to say shit it wasn't trained on.  
 
