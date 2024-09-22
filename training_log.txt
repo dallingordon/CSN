@@ -1,0 +1,70 @@
+data:
+  bits: 20
+  data_directory: data/digits_10_5k/digits_multiple
+  seq_bits: 5
+  seq_max_len: 10
+  seq_vocab_len: 10
+  target_pad: 20
+experiment_name: ssc_trial_1
+model:
+  file_embedding:
+    bits: 20
+    embedding_input_dim: 512
+    hidden_dim: 256
+    num_layers: 5
+  seq_embedding:
+    embedding_dim: 128
+    hidden_dim: 256
+    num_layers: 5
+    output_dim: 256
+    padding_idx: 10
+    seq_bits: 5
+    vocab_len: 11
+  seq_input:
+    hidden_dim: 256
+    input_embedding_dim: 256
+    num_layers: 5
+    output_dim: 512
+    seq_bits: 5
+  type: seq_encoding_seq_pred
+train:
+  batch_size: 100
+  bce_weight: 0.1
+  cdif_batch_weight: 0.4
+  cdif_weight: 1.6
+  consecutive_size: 20
+  learning_rate: 0.0001
+  num_epochs: 31
+  num_workers: 8
+  order: 3
+Epoch 1: Avg First 20 Loss: 0.127802, Avg Last 20 Loss: 0.060482
+Epoch 2: Avg First 20 Loss: 0.063029, Avg Last 20 Loss: 0.060312
+Epoch 3: Avg First 20 Loss: 0.058985, Avg Last 20 Loss: 0.047745
+Epoch 4: Avg First 20 Loss: 0.050392, Avg Last 20 Loss: 0.043491
+Epoch 5: Avg First 20 Loss: 0.043528, Avg Last 20 Loss: 0.037855
+Epoch 6: Avg First 20 Loss: 0.038697, Avg Last 20 Loss: 0.034422
+Epoch 7: Avg First 20 Loss: 0.035579, Avg Last 20 Loss: 0.032164
+Epoch 8: Avg First 20 Loss: 0.032618, Avg Last 20 Loss: 0.026816
+Epoch 9: Avg First 20 Loss: 0.029407, Avg Last 20 Loss: 0.029153
+Epoch 10: Avg First 20 Loss: 0.028298, Avg Last 20 Loss: 0.026374
+Epoch 11: Avg First 20 Loss: 0.026583, Avg Last 20 Loss: 0.025725
+Epoch 12: Avg First 20 Loss: 0.025238, Avg Last 20 Loss: 0.023669
+Epoch 13: Avg First 20 Loss: 0.025364, Avg Last 20 Loss: 0.022893
+Epoch 14: Avg First 20 Loss: 0.022097, Avg Last 20 Loss: 0.023295
+Epoch 15: Avg First 20 Loss: 0.022601, Avg Last 20 Loss: 0.022560
+Epoch 16: Avg First 20 Loss: 0.022694, Avg Last 20 Loss: 0.021560
+Epoch 17: Avg First 20 Loss: 0.022429, Avg Last 20 Loss: 0.021218
+Epoch 18: Avg First 20 Loss: 0.020377, Avg Last 20 Loss: 0.021538
+Epoch 19: Avg First 20 Loss: 0.018416, Avg Last 20 Loss: 0.019558
+Epoch 20: Avg First 20 Loss: 0.019710, Avg Last 20 Loss: 0.019096
+Epoch 21: Avg First 20 Loss: 0.019722, Avg Last 20 Loss: 0.019067
+Epoch 22: Avg First 20 Loss: 0.019676, Avg Last 20 Loss: 0.017756
+Epoch 23: Avg First 20 Loss: 0.018862, Avg Last 20 Loss: 0.018064
+Epoch 24: Avg First 20 Loss: 0.018404, Avg Last 20 Loss: 0.018216
+Epoch 25: Avg First 20 Loss: 0.019025, Avg Last 20 Loss: 0.017847
+Epoch 26: Avg First 20 Loss: 0.017442, Avg Last 20 Loss: 0.017270
+Epoch 27: Avg First 20 Loss: 0.016616, Avg Last 20 Loss: 0.017372
+Epoch 28: Avg First 20 Loss: 0.016784, Avg Last 20 Loss: 0.015935
+Epoch 29: Avg First 20 Loss: 0.018239, Avg Last 20 Loss: 0.015452
+Epoch 30: Avg First 20 Loss: 0.016805, Avg Last 20 Loss: 0.017157
+Epoch 31: Avg First 20 Loss: 0.015920, Avg Last 20 Loss: 0.016980
