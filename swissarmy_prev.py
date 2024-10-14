@@ -34,7 +34,7 @@ class SwissArmyLayer(nn.Module):
             self.embedding = nn.Embedding(one_hot_vocab_len + 1, one_hot_embedding_dim, padding_idx=one_hot_vocab_len)
 
         self.layers = nn.ModuleList(
-            [nn.Linear(hidden_dim, hidden_dim) for i in range(num_layers)])  # should work with zero too.
+            [nn.Linear(hidden_dim , hidden_dim ) for i in range(num_layers)])  # should work with zero too. no growing here
 
     def forward(self, t_seq, one_hot_idx=None, input_embedding=None):
 
@@ -114,35 +114,40 @@ import torch
 import torch.nn as nn
 
 class SeqDecoder(nn.Module):
-    def __init__(self, t_seq_bits, t_layer_dim, t_num_layers, fc_layers, decoder_layers, input_embedding_dim):
+    def __init__(self, t_seq_bits, t_layer_dim, t_num_layers, fc_layers, decoder_layers, input_embedding_dim,pred_prev_dim):
         super(SeqDecoder, self).__init__()
 
         # Set the initial input embedding dimension
-        self.input_embedding_dim = input_embedding_dim
+        self.input_embedding_dim = input_embedding_dim 
 
         # Create decoder layers (all the same, like test_decoder)
         self.decoder_layers = nn.ModuleList()
-        for _ in range(decoder_layers):
+        for i in range(decoder_layers):
+            prev_mult = i + 1
             self.decoder_layers.append(SwissArmyLayer(t_seq_bits=t_seq_bits,
                                                       t_layer_dim=t_layer_dim,
                                                       t_num_layers=t_num_layers,
                                                       num_layers=fc_layers,
                                                       one_hot_vocab_len=None,
                                                       one_hot_embedding_dim=None,
-                                                      input_embedding_dim=self.input_embedding_dim))
+                                                      input_embedding_dim=self.input_embedding_dim + prev_mult*pred_prev_dim))
             # Update the input_embedding_dim for subsequent layers
             if t_num_layers == 0:
                 self.input_embedding_dim += t_seq_bits
             else:
                 self.input_embedding_dim += t_layer_dim
 
-    def forward(self, t_seq, input_embedding):
+    def forward(self, t_seq, input_embedding,pred_prev):
         x = input_embedding
-
+       
+        
         # Pass through each decoder layer, updating the input embedding
         for layer in self.decoder_layers:
+            x = torch.cat((x, pred_prev), dim=1)
             x = layer(t_seq, input_embedding=x)
-
+            
+            
+            
         return x
 
 
@@ -182,7 +187,8 @@ class SeqModel(nn.Module):
             t_num_layers=decoder_config['t_num_layers'],
             fc_layers=decoder_config['fc_layers'],
             decoder_layers=decoder_config['decoder_layers'],
-            input_embedding_dim=encoder_output_dim
+            input_embedding_dim=encoder_output_dim,
+            pred_prev_dim = decoder_config['pred_prev_dim']
         )
 
         decoder_output_dim = self.decoder.decoder_layers[-1].layers[-1].out_features
@@ -213,15 +219,14 @@ class SeqModel(nn.Module):
 
         return nn.Sequential(*layers)
 
-    def forward(self, t_seq, one_hot_idx, t):
+    def forward(self, t_seq, one_hot_idx, t, pred_prev):
         # Encoder step
         encoded = self.encoder(t_seq, one_hot_idx=one_hot_idx)
 
         # Decoder step
-        decoded = self.decoder(t, input_embedding=encoded)
+        decoded = self.decoder(t, input_embedding=encoded,pred_prev = pred_prev)
 
         # Output layers
-        print(decoded.shape)
         mse_output = self.mse_head(decoded)
         bce_output = self.bce_head(decoded)
 

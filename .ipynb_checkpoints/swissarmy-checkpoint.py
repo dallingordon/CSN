@@ -221,6 +221,7 @@ class SeqModel(nn.Module):
         decoded = self.decoder(t, input_embedding=encoded)
 
         # Output layers
+        print(decoded.shape)
         mse_output = self.mse_head(decoded)
         bce_output = self.bce_head(decoded)
 
