@@ -106,8 +106,9 @@ class SeqEncoder(nn.Module):
             x = x.expand(-1, self.seq_len, -1)
             x = layer(t_seq, one_hot_idx=one_hot_idx, input_embedding=x)
             x = x.sum(dim=1, keepdim=True)
-
-        x = x.squeeze() #final layer squozen for decoder input
+        
+        x = x.squeeze(dim = 1) #final layer squozen for decoder input
+        
         return x
 
 import torch
